@@ -1,12 +1,14 @@
-<p>login-page works!</p>
-<form>
+<form [formGroup]="loginForm" class="container mt-5" (ngSubmit)="onSubmit()">
     <div class="form-group">
-        <label for="username">Username:</label>
-        <input class="form-control" id="username" type="text" [formControl]="username">
+        <label for="email">Username:</label>
+        <input class="form-control" id="email" type="text" formControlName="email">
     </div>
     <div class="form-group">
         <label for="password">Password: </label>
-        <input class="form-control" id="password" type="password">
+        <input class="form-control" id="password" formControlName="password" type="password">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
 </form>
+<pre>{{ test | json}}</pre>
+
+<button (click)="handleClick()">Test api</button>
