@@ -1,14 +1,16 @@
-<form [formGroup]="loginForm" class="container mt-5" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-        <label for="email">Username:</label>
-        <input class="form-control" id="email" type="text" formControlName="email">
-    </div>
-    <div class="form-group">
-        <label for="password">Password: </label>
-        <input class="form-control" id="password" formControlName="password" type="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<pre>{{ test | json}}</pre>
-
-<button (click)="handleClick()">Test api</button>
+<main class="form-signin w-100 m-auto">
+    <form [formGroup]="loginForm" class="container mt-5" (ngSubmit)="onSubmit()">
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <div class="form-floating mb-2">
+            <input class="form-control" id="floatingInput" type="text" formControlName="email" placeholder="name@example.com">
+            <label for="floatingInput">Email:</label>
+        </div>
+        <div class="form-floating">
+            <input class="form-control" id="floatingPassword" formControlName="password" type="password" placeholder="Password">
+            <label for="floatingPassword">Password: </label>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <pre>{{ test | json }}</pre>
+</main>

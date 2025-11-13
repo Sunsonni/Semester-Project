@@ -1,42 +1,32 @@
 import { Injectable } from '@angular/core';
 import User from '../models/user';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   // TODO: hide url of API
-  private baseurl: string = 'http://localhost:8888/semester-proj/' 
+  private baseurl: string = 'http://localhost:8888/semester-proj' 
 
-  async getUserById(id: number): Promise<User> {
-    try {
-      const response = await fetch(`${this.baseurl}/api.php/?id=${id}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error. status: ${response.status}`);
-      }
-      const data: User = await response.json();
-      return data;
-    } catch (error) {
-      console.error(`Error fetching user with ID ${id}`, error);
-      throw error;
-    }
-  }
+  constructor (private http: HttpClient){}
 
-  async verifyUser(email: string, password: string) : Promise<User> {
-    try {
-      const response = await fetch(`${this.baseurl}/login.php`, {
-        method: `POST`,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error. status: ${response.status}`);
-      }
-      const data: User = await response.json();
-      return data;
-    } catch (error) {
-      console.error(`Error verifying user`, error);
-      throw error;
-    }
+  // async getUserById(id: number): Promise<User> {
+  //   try {
+  //     const response = await fetch(`${this.baseurl}/api.php/?id=${id}`);
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error. status: ${response.status}`);
+  //     }
+  //     const data: User = await response.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.error(`Error fetching user with ID ${id}`, error);
+  //     throw error;
+  //   }
+  // }
+
+  verifyUser(email: string, password: string) : Observable<any> {
+    return this.http.post<any>(`${this.baseurl}/login.php`, { email,password });
   }
 }
