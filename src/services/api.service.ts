@@ -12,21 +12,15 @@ export class ApiService {
 
   constructor (private http: HttpClient){}
 
-  // async getUserById(id: number): Promise<User> {
-  //   try {
-  //     const response = await fetch(`${this.baseurl}/api.php/?id=${id}`);
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error. status: ${response.status}`);
-  //     }
-  //     const data: User = await response.json();
-  //     return data;
-  //   } catch (error) {
-  //     console.error(`Error fetching user with ID ${id}`, error);
-  //     throw error;
-  //   }
-  // }
+  verifyToken(token: string): Observable<any> {
+    return this.http.get<any>(`{this.baseurl}/login.php`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
   
   verifyUser(email: string, password: string) : Observable<any> {
-    return this.http.post<any>(`${this.baseurl}/login.php`, { email,password });
+    return this.http.post<any>(`${this.baseurl}/login.php`, { email,password })
   }
 }
