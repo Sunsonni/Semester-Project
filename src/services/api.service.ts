@@ -25,7 +25,7 @@ export class ApiService {
   //     throw error;
   //   }
   // }
-
+  
   verifyUser(email: string, password: string) : Observable<any> {
     return this.http.post<any>(`${this.baseurl}/login.php`, { email,password });
   }

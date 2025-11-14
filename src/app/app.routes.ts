@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { authGuard } from './guards/auth.guard';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
-    { path: '**', component: LoginPageComponent },
-    { path: 'login', component: LoginPageComponent },
+    { path: 'login', component: LoginPageComponent, canActivate: [loginGuard] },
+    { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
     // TODO: Create error page
-    { path: 'home', component: HomePageComponent },
+    { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

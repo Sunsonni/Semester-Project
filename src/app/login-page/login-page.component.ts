@@ -40,8 +40,9 @@ export class LoginPageComponent {
     let pass = this.loginForm.get('password')?.value;
     this.apiService.verifyUser(email, pass).subscribe({
         next: (res: any) => {
-          if (res?.message === "You've logged in successfully") {
-            localStorage.setItem('user', JSON.stringify(res.user));
+          if (res?.token) {
+            localStorage.setItem('token', res.token);
+            alert(res?.message || 'Logged in successfully');
             this.router.navigate(['/home'], { replaceUrl: true});
           } else {
             alert(res?.message || 'Login failed');
