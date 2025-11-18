@@ -1,39 +1,45 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Name (optional)</label>
-    <input formControlName="name" type="text" placeholder="John Doe" />
-  </div>
-
-  <div>
-    <label>Email (required)</label>
-    <input formControlName="email" type="email" placeholder="john@example.com" />
-    <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-      Valid email is required
+<main class="form-signin w-100 m-auto">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="container mt-5">
+    <div>
+      <h1 class="h3 mb-3 fw-normal">Register</h1>
+      <div class="form-floating mb-2">
+        <input class="form-control" formControlName="name" type="text" placeholder="Name" id="floatingName"/>
+        <label for="floatingName">Name</label>
+      </div>
     </div>
-  </div>
+    <div class="form-floating mb-2">
+      <input class="form-control" formControlName="email" type="email" placeholder="john@example.com" id="floatingEmail"/>
+      <label for="floatingEmail">Email (required)</label>
+      <!-- TODO: Switch validators from div to tooltip -->
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        Valid email is required
+      </div>
 
-  <div>
-    <label>Password (required)</label>
-    <input formControlName="password" type="password" />
-    <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-      Password is required
     </div>
-  </div>
-
-  <div>
-    <label>API Key (optional)</label>
-    <input formControlName="api_key" type="text" />
-  </div>
-
-  <div>
-    <label>Role (optional)</label>
-    <select formControlName="role">
-      <option value="">User (default)</option>
-      <option value="admin">Admin</option>
-    </select>
-  </div>
-
-  <button type="submit">Create User</button>
-</form>
-
-<div *ngIf="message" style="margin-top: 1rem;">{{ message }}</div>
+    
+    <div class="form-floating mb-2">
+      <input class="form-control" formControlName="password" type="password" id="floatingPass" placeholder="Password"/>
+      <label for="floatingPass">Password (required)</label>
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+        Password is required
+      </div>
+    </div>
+    
+    <div class="form-floating mb-2">
+      <input class="form-control" id="floatingKey" formControlName="api_key" type="text" placeholder="Key"/>
+      <label for="floatingKey">API Key (optional)</label>
+    </div>
+    
+    <div class="mb-3">
+      <label class="form-label">Role (optional)</label>
+      <select class="form-select" formControlName="role">
+        <option value="">User (default)</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Create User</button>
+  </form>
+  
+  <div *ngIf="message" class="mt-3 text-center">{{ message }}</div>
+</main>
