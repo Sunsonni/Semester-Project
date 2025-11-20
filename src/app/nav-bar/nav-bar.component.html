@@ -2,6 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
     <a class="navbar-brand fw-bold" href="#">TrashGBT</a>
+    <button class="btn btn-primary" type="button" *ngIf="!isLoggedIn" [routerLink]="'/register'">Register</button>
     <button class="navbar-toggler" 
         type="button"
         data-bs-toggle="collapse" 

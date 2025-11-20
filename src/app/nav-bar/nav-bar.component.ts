@@ -1,11 +1,13 @@
 import { NgIf } from '@angular/common';
 import { Component, effect } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
   imports: [
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
