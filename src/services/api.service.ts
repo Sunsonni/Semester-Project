@@ -23,9 +23,10 @@ export class ApiService {
   verifyUser(email: string, password: string) : Observable<any> {
     return this.http.post<any>(`${this.baseurl}/login.php`, { email,password })
   }
-  // TODO: test endpoint
+
   createUser(name: string, email: string, password: string, api_key: string, role: string) : Observable<any> {
     return this.http.post<any>(`${this.baseurl}/api.php`, { name, email, password, api_key, role
     })
   }
+  
 }
