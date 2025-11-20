@@ -12,6 +12,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalComponent {
   @Input({ required: true }) title = '';
   @Input({ required: true }) shown!: boolean;
+  @Input({ required: true }) message = '';
   @Output() shownChange = new EventEmitter<boolean>();
 
   closeModal() {

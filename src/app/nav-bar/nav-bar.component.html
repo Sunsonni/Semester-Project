@@ -14,12 +14,6 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
         <li class="nav-item" *ngIf="isLoggedIn">
-            <a class="nav-link" href="#">Docs</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#" *ngIf="isLoggedIn">API</a>
-        </li>
-        <li class="nav-item" *ngIf="isLoggedIn">
             <a class="nav-link" href="#" (click)="logout()">Sign Out</a>
         </li>
         </ul>

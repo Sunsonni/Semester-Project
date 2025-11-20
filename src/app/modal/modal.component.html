@@ -1,12 +1,22 @@
 <ng-container *ngIf="shown">
-  <div class="modal-container">
-    <div class="modal-header">
-      <h1>{{ title }}</h1>
-      <span (click)="closeModal()">X</span>
-    </div>
-    <div class="modal-content">
-      <ng-content></ng-content>
+  <div class="modal-backdrop fade show"></div>
+
+  <div class="modal d-block" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ title }}</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+
+        <div class="modal-body">
+          <p [innerHTML]="message"></p>
+          <ng-content></ng-content>
+        </div>
+
+        <div class="modal-footer">
+        </div>
+      </div>
     </div>
   </div>
-  <div class="backdrop"></div>
 </ng-container>
