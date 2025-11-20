@@ -6,7 +6,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title">{{ title }}</h5>
-          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()" *ngIf="allowClose"></button>
         </div>
 
         <div class="modal-body">
@@ -15,6 +15,7 @@
         </div>
 
         <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="addAPIKey()" *ngIf="!allowClose" [routerLink]="['/settings']">Add API Key</button>
         </div>
       </div>
     </div>

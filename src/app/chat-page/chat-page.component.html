@@ -1,1 +1,9 @@
 <p>chat-page works!</p>
+
+
+<app-modal
+    [(shown)]="modalVisible"
+    title="No API Key detected"
+    [message]="modalMessage"
+    [allowClose]="false"
+></app-modal>

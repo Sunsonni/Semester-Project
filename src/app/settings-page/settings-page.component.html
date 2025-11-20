@@ -1,0 +1,42 @@
+<div class="container d-flex justify-content-center mt-5">
+<div class="col-md-6">
+<!-- Settings Card -->
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-4">
+
+    <h4 class="mb-4">API Key Settings</h4>
+
+    <p class="text-muted mb-3">
+        To use the chat features, you need a Gemini API key. 
+        You can generate one 
+        <a href="https://aistudio.google.com/app/api-keys" target="_blank" rel="noopener">here</a>.
+    </p>
+
+    <!-- API Key Input -->
+    <div class="mb-3">
+        <input 
+        [type]="showKey ? 'text' : 'password'"
+        class="form-control form-control-lg rounded-pill" 
+        [placeholder]="apiKey"
+        name="apiKey"
+        >
+        <button class="btn btn-outline-secondary" type="button" (click)="showKey = !showKey">
+            {{ showKey ? 'Hide' : 'Show' }}
+        </button>
+    </div>
+
+    <!-- Save Button -->
+    <button class="btn btn-primary btn-lg w-100 rounded-pill" (click)="saveApiKey()">
+        Save API Key
+    </button>
+
+    <!-- Success / Error Messages -->
+    <div *ngIf="message" class="alert alert-success mt-3 rounded-pill text-center">
+        {{ message }}
+    </div>
+
+    </div>
+</div>
+
+</div>
+</div>

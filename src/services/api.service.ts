@@ -28,5 +28,12 @@ export class ApiService {
     return this.http.post<any>(`${this.baseurl}/api.php`, { name, email, password, api_key, role
     })
   }
+
+  getAPIKey(token: string) {
+    return this.http.post<any>(`${this.baseurl}/get-api-key.php`, {
+      token
+    })
+  }
+
   
 }

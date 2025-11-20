@@ -45,6 +45,7 @@
     [(shown)]="modalVisible"
     [message]="modalMessage"
     title="No API Key"
+    [allowClose]="true"
   ></app-modal>
   
   <div *ngIf="message" class="mt-3 text-center">{{ message }}</div>
