@@ -29,10 +29,8 @@ export class ApiService {
     })
   }
 
-  getAPIKey(token: string) {
-    return this.http.post<any>(`${this.baseurl}/get-api-key.php`, {
-      token
-    })
+  getAPIKey() : Observable<any> {
+    return this.http.post<any>(`${this.baseurl}/get-api-key.php`, {});
   }
 
   

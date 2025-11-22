@@ -32,6 +32,7 @@ export class AuthService {
       next: (res: any) => {
         if (res.token) {
           sessionStorage.setItem('token', res.token);
+          sessionStorage.setItem('refresh_token', res.refresh_token);
           sessionStorage.setItem('has_api_key', res.has_api_key);
           sessionStorage.setItem('role', res.role);
           this.isLoggedIn.set(true);
