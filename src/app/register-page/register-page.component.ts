@@ -32,10 +32,11 @@ export class RegisterPageComponent {
   ) {
     this.userForm = this.fb.group({
       name : ['', ],
+      username: ['', [Validators.required, Validators.minLength(5)]],
       email : ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       api_key: [''],  
-      role: [''] 
+      role: ['user'] 
     });
 
   }
@@ -51,11 +52,12 @@ export class RegisterPageComponent {
     }
 
     let name = this.userForm.get('name')?.value;
+    let username = this.userForm.get('username')?.value;
     let email = this.userForm.get('email')?.value;
     let pass = this.userForm.get('password')?.value;
     let api_key = this.userForm.get('api_key')?.value;
     let role = this.userForm.get('role')?.value;
-    this.api.createUser(name, email, pass, api_key, role).subscribe({
+    this.api.createUser(name, email, pass, api_key, role, username).subscribe({
       next: (res) => {
         this.message = "User added successfully! Redirecting...";
         this.router.navigate(["/login"]);
