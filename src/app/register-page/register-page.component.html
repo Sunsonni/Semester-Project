@@ -2,47 +2,62 @@
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="container mt-5">
     <div>
       <h1 class="h3 mb-3 fw-normal">Register</h1>
+      
       <div class="form-floating mb-2">
         <input class="form-control" formControlName="name" type="text" placeholder="Name" id="floatingName"/>
         <label for="floatingName">Name</label>
       </div>
+      
       <div class="form-floating mb-2">
-        <input class="form-control" formControlName="username" type="text" placeholder="Username" id="floatingUsername"/>
+        <input class="form-control" formControlName="username" type="text" placeholder="Username" id="floatingUsername"
+               [class.is-invalid]="userForm.get('username')?.invalid && userForm.get('username')?.touched"/>
         <label for="floatingUsername">Username (required)</label>
+        <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" 
+             class="text-danger small mt-1">
+          <div *ngIf="userForm.get('username')?.errors?.['required']">Username is required</div>
+          <div *ngIf="userForm.get('username')?.errors?.['minlength']">Username must be at least 5 characters</div>
+          <div *ngIf="userForm.get('username')?.errors?.['unique']">Username already exists</div>
+        </div>
       </div>
-    </div>
-    <div class="form-floating mb-2">
-      <input class="form-control" formControlName="email" type="email" placeholder="john@example.com" id="floatingEmail"/>
-      <label for="floatingEmail">Email (required)</label>
-      <!-- TODO: Switch validators from div to tooltip -->
-      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
-        Valid email is required
-      </div>
-
     </div>
     
     <div class="form-floating mb-2">
-      <input class="form-control" formControlName="password" type="password" id="floatingPass" placeholder="Password"/>
+      <input class="form-control" formControlName="email" type="email" placeholder="john@example.com" id="floatingEmail"
+             [class.is-invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched"/>
+      <label for="floatingEmail">Email (required)</label>
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" 
+           class="text-danger small mt-1">
+        <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required</div>
+        <div *ngIf="userForm.get('email')?.errors?.['email']">Please enter a valid email address</div>
+        <div *ngIf="userForm.get('email')?.errors?.['unique']">Email already exists</div>
+      </div>
+    </div>
+    
+    <div class="form-floating mb-2">
+      <input class="form-control" formControlName="password" type="password" id="floatingPass" placeholder="Password"
+             [class.is-invalid]="userForm.get('password')?.invalid && userForm.get('password')?.touched"/>
       <label for="floatingPass">Password (required)</label>
-      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
-        Password is required
+      <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" 
+           class="text-danger small mt-1">
+        <div *ngIf="userForm.get('password')?.errors?.['required']">Password is required</div>
+        <div *ngIf="userForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</div>
       </div>
     </div>
     
     <div class="form-floating mb-2">
       <input class="form-control" id="floatingKey" formControlName="api_key" type="text" placeholder="Key"/>
       <label for="floatingKey">API Key (optional)</label>
+       <div *ngIf="warned && !userForm.get('api_key')?.value?.trim()" class="text-warning small mt-1">
+        ⚠️ No API key provided - chat features will be disabled
+      </div>
     </div>
     
-    <div class="mb-3">
-      <label class="form-label">Role (optional)</label>
-      <select class="form-select" formControlName="role">
-        <option value="user">User (default)</option>
-        <option value="admin">Admin</option>
-      </select>
-    </div>
-    
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Create User</button>
+    <button class="w-100 btn btn-lg" 
+        [class.btn-warning]="warned && !userForm.get('api_key')?.value?.trim()"
+        [class.btn-primary]="!warned || userForm.get('api_key')?.value?.trim()"
+        type="submit">
+  {{ (warned && !userForm.get('api_key')?.value?.trim()) ? 'Continue Without API Key' : 'Create User' }}
+</button>
   </form>
 
   <app-modal

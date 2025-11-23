@@ -27,8 +27,8 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string) {
-    return this.api.verifyUser(email,password).subscribe({
+  login(identifier: string, password: string) {
+    return this.api.verifyUser(identifier, password).subscribe({
       next: (res: any) => {
         if (res.token) {
           sessionStorage.setItem('token', res.token);

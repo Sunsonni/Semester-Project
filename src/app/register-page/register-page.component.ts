@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
 import { ModalComponent } from '../modal/modal.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -23,6 +24,7 @@ export class RegisterPageComponent {
   modalVisible = false;
   modalMessage = '';
   warned = false;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private fb: FormBuilder, 
@@ -40,7 +42,6 @@ export class RegisterPageComponent {
     });
 
   }
-  //TODO: add invalid item or whatever validators and shit
   
   onSubmit() {
     if (!this.userForm.get('api_key')?.value.trim() && !this.warned) {
@@ -48,6 +49,7 @@ export class RegisterPageComponent {
       <strong>WARNING:</strong> You need a <a href="https://aistudio.google.com/app/api-keys" target="_blank" rel="noopener">Gemini API key</a> to use the chat. You can continue with registration without it, but chat features won't work until you add a key.`;
       this.modalVisible = true;
       this.warned = true;
+      this.userForm.get('api_key')?.markAsTouched();
       return;
     }
 
@@ -56,13 +58,26 @@ export class RegisterPageComponent {
     let email = this.userForm.get('email')?.value;
     let pass = this.userForm.get('password')?.value;
     let api_key = this.userForm.get('api_key')?.value;
-    let role = this.userForm.get('role')?.value;
-    this.api.createUser(name, email, pass, api_key, role, username).subscribe({
+    this.api.createUser(name, email, pass, api_key, username).subscribe({
       next: (res) => {
-        this.message = "User added successfully! Redirecting...";
         this.router.navigate(["/login"]);
+      },
+      error: (error) => {
+        if (error.error?.message?.includes('Username already exists')) {
+          this.userForm.get('username')?.setErrors({ unique: true });
+          this.message = ''; // Clear the general message
+        } else if (error.error?.message?.includes('Email already exists')) {
+          this.userForm.get('email')?.setErrors({ unique: true });
+          this.message = ''; // Clear the general message
+        } else {
+          this.message = error.error?.message || 'An error occurred';
+        }
       }
     });
     }
-    
+
+    ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -22,16 +22,16 @@ export class LoginPageComponent {
     private router: Router,
   ) {
     this.loginForm = this.fb.group({
-      email : ['', [Validators.required, Validators.email]],
+      identifier : ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
   }
   
   onSubmit() {
-    let email = this.loginForm.get('email')?.value;
+    let identifier = this.loginForm.get('identifier')?.value;
     let pass = this.loginForm.get('password')?.value;
-    this.auth.login(email, pass);
+    this.auth.login(identifier, pass);
     }
     
 }

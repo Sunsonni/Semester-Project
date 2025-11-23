@@ -20,12 +20,12 @@ export class ApiService {
     })
   }
   
-  verifyUser(email: string, password: string) : Observable<any> {
-    return this.http.post<any>(`${this.baseurl}/login.php`, { email,password })
+  verifyUser(identifier: string, password: string) : Observable<any> {
+    return this.http.post<any>(`${this.baseurl}/login.php`, { identifier,password })
   }
 
-  createUser(name: string, email: string, password: string, api_key: string, role: string, username: string) : Observable<any> {
-    return this.http.post<any>(`${this.baseurl}/api.php`, { name, email, password, api_key, role, username
+  createUser(name: string, email: string, password: string, api_key: string, username: string) : Observable<any> {
+    return this.http.post<any>(`${this.baseurl}/api.php`, { name, email, password, api_key, username
     })
   }
 
