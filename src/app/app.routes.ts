@@ -7,6 +7,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
+import { NewChatModalComponent } from './new-chat-modal/new-chat-modal.component';
 
 export const routes: Routes = [
     { path: '', component: LoginPageComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'chat', component: ChatPageComponent, canActivate: [authGuard] },
     { path: 'settings', component: SettingsPageComponent, canActivate: [authGuard] },
     { path: 'error', component: ErrorPageComponent },
+    { path: 'test', component: NewChatModalComponent },
     { path: '**', redirectTo: 'error' },
 ];

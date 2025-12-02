@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { ApiService } from './api.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,28 @@ export class AuthService {
   
   constructor(private api: ApiService, private router: Router) {}
 
+  
+  refreshTokens() {
+    const refreshToken = sessionStorage.getItem('refresh_token');
+    
+    if(!refreshToken) {
+      this.logout();
+      return;
+    }
+    
+    this.api.refreshToken(refreshToken).subscribe({
+      next: (res: any) => {
+        if (res.access_token) {
+          sessionStorage.setItem('token', res.access_token);
+          console.log('Token refreshed automatically');
+        }
+      }, 
+      error: () => {
+        this.logout();
+      }
+    })
+  }
+  
   ngOnInit() {
     const token = sessionStorage.getItem('token');
     

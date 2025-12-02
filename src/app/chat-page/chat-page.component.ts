@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ModalComponent } from "../modal/modal.component";
+import { NewChatModalComponent } from '../new-chat-modal/new-chat-modal.component';
 
 @Component({
   selector: 'app-chat-page',
-  imports: [ModalComponent],
+  imports: [ ModalComponent, NewChatModalComponent ],
   templateUrl: './chat-page.component.html',
   styleUrl: './chat-page.component.css'
 })
 export class ChatPageComponent {
   modalVisible = false;
+  newChatModalVisible = false;
   modalMessage = '';
+
   constructor(){
     if (sessionStorage.getItem('has_api_key') === 'false') {
       this.modalVisible = true;
@@ -20,5 +23,14 @@ export class ChatPageComponent {
       Gemini API Keys
       </a>.`;
     }
+    if(!!sessionStorage.getItem('chat_session_id')) {
+      this.newChatModalVisible = true;
+    }
   }
+
+  ngOnInit() {
+    
+  }
+
+  
 }

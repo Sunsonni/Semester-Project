@@ -33,5 +33,16 @@ export class ApiService {
     return this.http.post<any>(`${this.baseurl}/get-api-key.php`, {});
   }
 
+  createSession(title: string, flavor: string) : Observable<any> {
+    return this.http.post<any>(`${this.baseurl}/create-session.php`, {
+      title, flavor
+    })
+  }
+
+  refreshToken(refreshToken: string) : Observable<any>{
+    return this.http.post<any>(`${this.baseurl}/refresh-token.php`, {
+      refresh_token: refreshToken
+    })
+  }
   
 }
