@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import User from '../models/user';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ApiService {
   // TODO: hide url of API
-  private baseurl: string = 'http://localhost:8888/semester-proj' 
+  private baseurl: string = 'http://localhost:8080/' 
 
   constructor (private http: HttpClient){}
 
@@ -42,6 +41,18 @@ export class ApiService {
   refreshToken(refreshToken: string) : Observable<any>{
     return this.http.post<any>(`${this.baseurl}/refresh-token.php`, {
       refresh_token: refreshToken
+    })
+  }
+
+  getSession(chat_session_id: Number){
+    return this.http.post<any>(`${this.baseurl}/get-session-by-id.php`, {
+      chat_session_id
+    })
+  }
+
+  sendMessage(chat_session_id: Number, message: string){
+    return this.http.post<any>(`${this.baseurl}/chat.php`, {
+      chat_session_id, message
     })
   }
   

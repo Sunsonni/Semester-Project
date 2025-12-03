@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { signal } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-new-chat-modal',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './new-chat-modal.component.html',
   styleUrl: './new-chat-modal.component.css'

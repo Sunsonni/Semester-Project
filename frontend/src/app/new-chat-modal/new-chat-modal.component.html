@@ -1,0 +1,51 @@
+<div class="modal fade show d-block" tabindex="-1" role="dialog" *ngIf="shown">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Chat</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <!-- Warning Alert -->
+        <div *ngIf="showWarning" class="alert alert-danger d-flex justify-content-between align-items-center" role="alert">
+          <div>
+            <strong>Cancel</strong> will take you back to the home page.
+          </div>
+        </div>
+
+        <!-- Form -->
+        <form [formGroup]="form">
+          <!-- Bot Flavor Selection -->
+          <div class="mb-3">
+            <label class="form-label">Select Bot Flavor</label>
+            <select formControlName="flavor" class="form-select">
+              <option value="default">Default</option>
+              <option value="corporate">Corporate</option>
+              <option value="influencer">Influencer</option>
+              <option value="conspiracy">Conspiracy</option>
+            </select>
+          </div>
+
+          <!-- Chat Title -->
+          <div class="mb-3">
+            <label class="form-label">Chat Title</label>
+            <input class="form-control" placeholder="e.g., Homework Help" formControlName="title" />
+          </div>
+        </form>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">Cancel</button>
+        <button type="button" class="btn btn-primary" [disabled]="form.invalid" (click)="confirm()">Create Chat</button>
+      </div>
+
+    </div>
+  </div>
+</div>
