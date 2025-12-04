@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private api: ApiService, private router: Router) {}
 
   
-  refreshTokens() {
+  refreshToken() {
     const refreshToken = sessionStorage.getItem('refresh_token');
     
     if(!refreshToken) {

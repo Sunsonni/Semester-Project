@@ -1,10 +1,10 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
-import { Inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { catchError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = Inject(AuthService);
+  const auth = inject(AuthService);
   const token = sessionStorage.getItem('token');
   
   const authReq = token
@@ -16,7 +16,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error) => {
       if (error.status === 401) {
-        authService.refreshTokens();
+        auth.refreshToken();
       }
       throw error;
     })

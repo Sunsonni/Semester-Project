@@ -22,7 +22,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, ɵInternalFormsSharedModul
 })
 export class ChatPageComponent {
 @ViewChild('chatContainer') private chatContainer!: ElementRef;
-
+// TODO: switch input to a text area or something along those lines
   modalVisible = false;
   newChatModalVisible = false;
   modalMessage = '';
