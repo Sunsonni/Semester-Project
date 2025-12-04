@@ -9,7 +9,8 @@
                 title, 
                 flavor,
                 created_at, 
-                last_updated
+                last_updated,
+                chat_session_id
             from chat_sessions cs 
             where user_id = :user_id" 
     );

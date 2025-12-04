@@ -2,7 +2,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
 import { ModalComponent } from "../modal/modal.component";
 import { NewChatModalComponent } from '../new-chat-modal/new-chat-modal.component';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { signal } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
@@ -33,7 +33,8 @@ export class ChatPageComponent {
   constructor(
     private api: ApiService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ){
     this.form = this.fb.group({
       input : ['']
@@ -41,6 +42,17 @@ export class ChatPageComponent {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      const chat_session_id = params.get('id') || sessionStorage.getItem('chat_session_id');
+      console.log(chat_session_id);
+      if (!chat_session_id) {
+        this.newChatModalVisible = true;
+      } else {
+        sessionStorage.setItem('chat_session_id', chat_session_id);
+        this.loadSession(Number(chat_session_id))
+      }
+    })
+
     const hasAPIKey = sessionStorage.getItem('has_api_key') === 'true';
     if (!hasAPIKey) {
       this.modalVisible = true;
@@ -51,13 +63,6 @@ export class ChatPageComponent {
       Gemini API Keys
       </a>.`;
     }
-    const chatSessionId = sessionStorage.getItem('chat_session_id')
-    if(!chatSessionId) {
-      this.newChatModalVisible = true;
-    }
-    
-    this.loadSession(Number(chatSessionId));
-    
   }
 
   onChatConfirmed(event: any) {
