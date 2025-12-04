@@ -59,5 +59,9 @@ export class ApiService {
   getChatList(){
     return this.http.post<any>(`${this.baseurl}/get-chats-by-user.php`, {});
   }
+
+  checkAdmin(){
+    return this.http.get<any>(`${this.baseurl}/check-admin.php`);
+  }
   
 }

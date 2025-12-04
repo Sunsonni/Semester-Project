@@ -8,6 +8,8 @@ import { ChatPageComponent } from './chat-page/chat-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { SettingsPageComponent } from './settings-page/settings-page.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
+import { AdminComponent } from './admin/admin.component';
+import { adminGuard } from './guards/admin.guard';
 ChatListComponent
 
 export const routes: Routes = [
@@ -17,7 +19,8 @@ export const routes: Routes = [
     { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
     { path: 'chat/:id', component: ChatPageComponent, canActivate: [authGuard] },
     { path: 'settings', component: SettingsPageComponent, canActivate: [authGuard] },
-    { path: 'error', component: ErrorPageComponent },
     { path: 'chats', component: ChatListComponent, canActivate: [authGuard]},
+    { path: 'admin', component: AdminComponent, canActivate: [authGuard, adminGuard]},
+    { path: 'error', component: ErrorPageComponent },
     { path: '**', redirectTo: 'error' },
 ];

@@ -1,14 +1,15 @@
 import { NgIf } from '@angular/common';
 import { Component, effect } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
   imports: [
     NgIf,
-    RouterLink
+    RouterLink,
+    RouterModule
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
@@ -28,6 +29,10 @@ export class NavBarComponent {
 
   get isLoggedIn() : Boolean {
     return this.auth.isLoggedIn() || !!sessionStorage.getItem('token');
+  }
+
+  get role() {
+    return sessionStorage.getItem('role');
   }
 
   get buttonText() : string {
