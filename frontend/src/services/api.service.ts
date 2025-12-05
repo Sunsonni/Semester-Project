@@ -64,4 +64,18 @@ export class ApiService {
     return this.http.get<any>(`${this.baseurl}/check-admin.php`);
   }
   
+  getAllUsers(){
+    return this.http.get<any>(`${this.baseurl}/get-all-users.php`);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`${this.baseurl}/delete-user.php?id=${id}`);
+  }
+
+  updateUserRole(id: number, role: string) {
+    return this.http.post<any>(`${this.baseurl}/update-user-role.php`, {
+      id, 
+      role
+    });
+  }
 }

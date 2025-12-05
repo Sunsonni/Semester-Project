@@ -36,7 +36,7 @@ export class RegisterPageComponent {
       name : ['', ],
       username: ['', [Validators.required, Validators.minLength(5)]],
       email : ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
       api_key: [''],  
       role: ['user'] 
     });
