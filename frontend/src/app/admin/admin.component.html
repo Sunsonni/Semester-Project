@@ -34,6 +34,7 @@
                   'bg-primary': u.role === 'admin',
                   'bg-secondary': u.role === 'user'
                 }"
+                
               >
                 {{ u.role }}
               </span>
@@ -43,6 +44,7 @@
               <button
                 class="btn btn-sm btn-outline-warning me-2"
                 (click)="toggleRole(u)"
+                *ngIf="u.id !== currentUserId"
               >
                 Toggle Role
               </button>
@@ -50,6 +52,7 @@
               <button
                 class="btn btn-sm btn-outline-danger"
                 (click)="deleteUser(u.id)"
+                *ngIf="u.id !== currentUserId"
               >
                 Delete User
               </button>

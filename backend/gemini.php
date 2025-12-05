@@ -1,8 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-use Gemini\Enums\ModelVariation;
-use Gemini\GeminiHelper;
-use Gemini;
+
 use Gemini\Data\Content;
 use Gemini\Enums\Role;
 

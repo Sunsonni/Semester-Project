@@ -13,6 +13,7 @@ import { ApiService } from '../../services/api.service';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+  currentUserId = 0;
   //TODO: switch to signal
   users: any[] = [];
   loading = true;
@@ -29,6 +30,7 @@ export class AdminComponent {
     this.api.getAllUsers().subscribe({
       next: response => {
         this.users = response.users;
+        this.currentUserId = response.current_user_id;
         this.loading = false;
       }
     });

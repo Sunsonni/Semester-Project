@@ -22,7 +22,6 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, ɵInternalFormsSharedModul
 })
 export class ChatPageComponent {
 @ViewChild('chatContainer') private chatContainer!: ElementRef;
-// TODO: switch input to a text area or something along those lines
   modalVisible = false;
   newChatModalVisible = false;
   modalMessage = '';
@@ -42,17 +41,6 @@ export class ChatPageComponent {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const chat_session_id = params.get('id') || sessionStorage.getItem('chat_session_id');
-      console.log(chat_session_id);
-      if (!chat_session_id) {
-        this.newChatModalVisible = true;
-      } else {
-        sessionStorage.setItem('chat_session_id', chat_session_id);
-        this.loadSession(Number(chat_session_id))
-      }
-    })
-
     const hasAPIKey = sessionStorage.getItem('has_api_key') === 'true';
     if (!hasAPIKey) {
       this.modalVisible = true;
@@ -62,7 +50,25 @@ export class ChatPageComponent {
       <a href="https://aistudio.google.com/app/api-keys" target="_blank" rel="noopener">
       Gemini API Keys
       </a>.`;
+    } else {
+      this.checkChatSession();
     }
+
+   
+
+  }
+
+  checkChatSession() {
+     this.route.paramMap.subscribe(params => {
+      const chat_session_id = params.get('id') || sessionStorage.getItem('chat_session_id');
+
+      if (!chat_session_id) {
+        this.newChatModalVisible = true;
+      } else {
+        sessionStorage.setItem('chat_session_id', chat_session_id);
+        this.loadSession(Number(chat_session_id))
+      }
+    })
   }
 
   onChatConfirmed(event: any) {
@@ -104,6 +110,12 @@ export class ChatPageComponent {
     } catch (error) {
       console.error('Scroll to bottom failed', error);
     }
+  }
+
+  autoResize(event: Event) {
+    const textarea = event.target as HTMLTextAreaElement;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
   }
   
 }

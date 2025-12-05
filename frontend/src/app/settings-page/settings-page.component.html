@@ -10,7 +10,7 @@
         <a href="https://aistudio.google.com/app/api-keys" target="_blank" rel="noopener">here</a>.
     </p>
     <!-- Missing API Key Warning -->
-    <div *ngIf="!apiKeyControl" class="alert alert-warning d-flex justify-content-between align-items-center">
+    <div *ngIf="!hasAPIKey" class="alert alert-warning d-flex justify-content-between align-items-center">
       <span>No API key detected. Chat features will not work.</span>
       <a 
         href="https://aistudio.google.com/app/api-keys" 
@@ -23,19 +23,26 @@
     </div>
 
     
-    <!-- API Key Input -->
-    <div class="mb-3">
-        <input 
+   <!-- API Key Input with Show/Hide button -->
+  <div class="mb-3">
+    <div class="input-group input-group-lg">
+      <input 
         [type]="showKey ? 'text' : 'password'"
-        class="form-control form-control-lg" 
+        class="form-control"
         name="apiKey"
         [formControl]="apiKeyControl"
-        >
-        <button class="btn btn-outline-secondary" type="button" (click)="showKey = !showKey">
-            {{ showKey ? 'Hide' : 'Show' }}
-        </button>
+        placeholder="Enter API Key"
+      >
+      <button 
+        class="btn btn-outline-secondary" 
+        type="button" 
+        (click)="showKey = !showKey"
+      >
+        {{ showKey ? 'Hide' : 'Show' }}
+      </button>
     </div>
-    
+  </div>
+      
     <!-- Save Button -->
     <button class="btn btn-primary btn-lg w-100 rounded-pill" (click)="saveApiKey()">
         Save API Key

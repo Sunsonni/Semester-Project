@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { signal } from '@angular/core';
 import { ApiService } from '../../services/api.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from "@angular/router";
 
@@ -10,7 +10,8 @@ import { RouterLink } from "@angular/router";
   imports: [
     NgFor,
     DatePipe,
-    RouterLink
+    RouterLink,
+    NgIf
 ],
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.css'

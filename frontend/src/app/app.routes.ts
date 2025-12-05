@@ -17,6 +17,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterPageComponent },
     { path: 'login', component: LoginPageComponent, canActivate: [loginGuard] },
     { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
+    { path: 'chat', component: ChatPageComponent, canActivate: [authGuard] },
     { path: 'chat/:id', component: ChatPageComponent, canActivate: [authGuard] },
     { path: 'settings', component: SettingsPageComponent, canActivate: [authGuard] },
     { path: 'chats', component: ChatListComponent, canActivate: [authGuard]},

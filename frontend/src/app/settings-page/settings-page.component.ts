@@ -12,15 +12,16 @@ import { Subject, takeUntil } from 'rxjs';
 export class SettingsPageComponent {
   message: string = "";
   showKey = false;
+  hasAPIKey = false;
   apiKeyControl = new FormControl('');
   private destroy$ = new Subject<void>();
 
   constructor(private api: ApiService) {}
 
   ngOnInit() {
-    const hasAPIKey = sessionStorage.getItem('has_api_key') === 'true';
+    this.hasAPIKey = sessionStorage.getItem('has_api_key') === 'true';
     const token = sessionStorage.getItem('token');
-    if (hasAPIKey && token) {
+    if (this.hasAPIKey && token) {
           this.api.getAPIKey().pipe(
             takeUntil(this.destroy$)
           ).subscribe({
@@ -39,7 +40,22 @@ export class SettingsPageComponent {
 
 
   saveApiKey(){
+    const apiKey = this.apiKeyControl.value;
+    if (!apiKey) {
+      this.message = "API keu cannot be empty";
+      return;
+    }
 
+    this.api.saveAPIKey(apiKey).subscribe({
+      next: (response) => {
+        this.message = 'API Key saved successfully';
+        sessionStorage.setItem('has_api_key', 'true');
+      }, 
+      error: (error) => {
+        console.error('Failed to save API key', error);
+        this.message = 'Failed to save API key';
+      }
+    });
   }
 
   ngOnDestroy(){

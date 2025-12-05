@@ -36,6 +36,12 @@ export class ApiService {
   getAPIKey() : Observable<any> {
     return this.http.post<any>(`${this.baseurl}/get-api-key.php`, {});
   }
+
+  saveAPIKey (apiKey: string) {
+    return this.http.post<any>(`${this.baseurl}/save-api-key.php`, {
+      api_key: apiKey
+    })
+  }
   
   
   createSession(title: string, flavor: string) : Observable<any> {

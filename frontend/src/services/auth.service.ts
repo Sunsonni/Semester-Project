@@ -66,7 +66,7 @@ export class AuthService {
   }
 
   logout() {
-    sessionStorage.removeItem('token');
+    sessionStorage.clear();
     this.isLoggedIn.set(false);
     this.router.navigate(['/login'], { replaceUrl: true });
   }
