@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { signal } from '@angular/core';
 import { NgIf, NgFor } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, ɵInternalFormsSharedModule } from "@angular/forms";
+import { MarkdownPipe } from '../pipes/markdown.pipe';
 
 @Component({
   selector: 'app-chat-page',
@@ -15,7 +16,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, ɵInternalFormsSharedModul
     NgIf,
     NgFor,
     ɵInternalFormsSharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MarkdownPipe
 ],
   templateUrl: './chat-page.component.html',
   styleUrl: './chat-page.component.css'

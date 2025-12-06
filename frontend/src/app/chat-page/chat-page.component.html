@@ -10,14 +10,14 @@
           <!-- USER MESSAGE -->
           <div *ngIf="msg.role === 'user'" class="d-flex justify-content-end mb-3">
             <div class="p-3 bg-primary text-white rounded-3" style="max-width: 75%;">
-              {{ msg.content }}
+              <div [innerHTML]="msg.content | markdown"></div>
             </div>
           </div>
 
           <!-- ASSISTANT MESSAGE -->
           <div *ngIf="msg.role === 'assistant'" class="d-flex justify-content-start mb-3">
             <div class="p-3 bg-light border rounded-3" style="max-width: 75%;">
-              {{ msg.content }}
+              <div [innerHTML]="msg.content | markdown"></div>
             </div>
           </div>
 
