@@ -11,14 +11,6 @@ services:
       - db_data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
-  frontend:
-    build: ./frontend
-    ports:
-      - "4200:80"
-    depends_on:
-      - backend
-
-
   backend:
     build: ./backend
     ports:
@@ -27,6 +19,13 @@ services:
       - ./backend:/var/www/html
     depends_on:
       - db
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:80"   # your Nginx/Apache serving Angular dist folder
+    depends_on:
+      - backend
 
 volumes:
   db_data:

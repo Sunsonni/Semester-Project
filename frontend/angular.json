@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "semester-project": {
+    "project": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "semester-project:build:production"
+              "buildTarget": "project:build:production"
             },
             "development": {
-              "buildTarget": "semester-project:build:development"
+              "buildTarget": "project:build:development"
             }
           },
           "defaultConfiguration": "development"

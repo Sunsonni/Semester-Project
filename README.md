@@ -17,6 +17,20 @@ Folder Structure:
     - docker-compose.yml
     - README.md 
 
+
+HOW TO RUN:
+1. Build the containers
+    docker-compose up --build
+2. Import the database
+    docker exec -i project-db-1 psql -U teacher_user -d postgres < project.sql
+3. Access the frontend 
+    http://localhost:4200
+4. Admin login
+    admin
+    admin
+5. Stop the project
+    docker-compose down
+
 PROCESS:
     DB:
         Initially was using mysql and then switched to postgresql

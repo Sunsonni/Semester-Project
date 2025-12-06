@@ -1,0 +1,9 @@
+# Ignore local dependencies (we install fresh in the container)
+node_modules
+
+# Ignore distribution folder (it's created by the build process)
+dist
+
+# Ignore editor/IDE files
+.git
+.gitignore
